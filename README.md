@@ -1,4 +1,4 @@
-![img2](https://github.com/SezorusArticles/Article_EZ001/blob/master/Images/header.jpg)
+![img2](https://github.com/2ZGroupSolutionsArticles/Article_EZ001/blob/master/Images/header.jpg)
 <br>
 
 # How to sign a URLRequest and download a file from S3 in iOS.
@@ -17,7 +17,7 @@ Let’s create signed request to get a non-public image from our S3 bucket.<br>
 AWS uses Signature V4 so that we will use it. But old regions can still support Signature V2, if they were created until 10 Jan 2014, according to official documentation.
 
 At the beginning we need S3. I propose to create it without help from Mobile Hub side.
-Just [skip](https://github.com/SezorusArticles/Article_001#implement-urlrequest-signing-in-ios) this section if you’re familiar with AWS and this process.
+Just [skip](https://github.com/2ZGroupSolutionsArticles/Article_001#implement-urlrequest-signing-in-ios) this section if you’re familiar with AWS and this process.
 
 
 ## Setup AWS
@@ -25,23 +25,23 @@ Just [skip](https://github.com/SezorusArticles/Article_001#implement-urlrequest-
 I assume that you already have AWS developer account. Or you can create one for testing. AWS has [free tiers](https://aws.amazon.com/free/), and it’s enough for experimenting with various ideas, learning or even MVP. 
 
 We need to select S3 service from the list of services.
-![img1](https://github.com/SezorusArticles/Article_EZ001/blob/master/Images/img1.jpg)<br><br>
+![img1](https://github.com/2ZGroupSolutionsArticles/Article_EZ001/blob/master/Images/img1.jpg)<br><br>
 
 Now we can create a new bucket for testing.
 Let’s call it **downloadimagetestbucket**. We can keep all settings by default for now.
-![img2](https://github.com/SezorusArticles/Article_EZ001/blob/master/Images/img2.jpg)<br><br>
+![img2](https://github.com/2ZGroupSolutionsArticles/Article_EZ001/blob/master/Images/img2.jpg)<br><br>
 
 We have storage, so let’s upload our test image. Keep all default settings for it, to be sure that it’s not public.
-![img3](https://github.com/SezorusArticles/Article_EZ001/blob/master/Images/img3.jpg)<br><br>
+![img3](https://github.com/2ZGroupSolutionsArticles/Article_EZ001/blob/master/Images/img3.jpg)<br><br>
 
 We need AWS credentials to generate request signature. We can use access key ID and secret generated for our root account. But it can be not a good idea, especially if you’re an owner. Such credentials will have full access to everything. We can use them for fast experiments, but not for real life Apps. We will create separate [IAM](https://aws.amazon.com/iam/) user only with access to our test bucket. 
 
 As before from AWS console with all services list select IAM.
 From “Users” tab we can add a new user.
-![img4](https://github.com/SezorusArticles/Article_EZ001/blob/master/Images/img4.jpg)<br><br>
+![img4](https://github.com/2ZGroupSolutionsArticles/Article_EZ001/blob/master/Images/img4.jpg)<br><br>
 
 A mythical person with name **downloadimagetestuser** and **Programmatic access**.
-![img5](https://github.com/SezorusArticles/Article_EZ001/blob/master/Images/img5.jpg)<br><br>
+![img5](https://github.com/2ZGroupSolutionsArticles/Article_EZ001/blob/master/Images/img5.jpg)<br><br>
 
 And then just next… next… next and create. Do not forget to save ID and secret.<br>
 We have the user without any permissions, and he can do nothing in our AWS. Absolutely useless person.
@@ -49,7 +49,7 @@ We have the user without any permissions, and he can do nothing in our AWS. Abso
 Let’s teach him some tricks. We need to add permission to access S3.
 
 For that, we’ll create separate policy from the Policies tab.
-![img6](https://github.com/SezorusArticles/Article_EZ001/blob/master/Images/img6.jpg)<br><br>
+![img6](https://github.com/2ZGroupSolutionsArticles/Article_EZ001/blob/master/Images/img6.jpg)<br><br>
 
 We can play with a visual editor, but sometimes with JSON, it can be much faster. But in this case we should know what are we doing; otherwise it won’t work or even validated.
 
@@ -74,11 +74,11 @@ JSON looks like
 
 Let’s name it **downloadimagetestbucketpolicy**. You can add some description too. And then create it. 
 Now we should go back to our created useless user. Select it and in the permission tab select *Add permissions*.
-![img7](https://github.com/SezorusArticles/Article_EZ001/blob/master/Images/img7.jpg)<br><br>
+![img7](https://github.com/2ZGroupSolutionsArticles/Article_EZ001/blob/master/Images/img7.jpg)<br><br>
 
 Select *Attach existing policies directly* and filter by policy name.
 Attach the test policy to the user.
-![img8](https://github.com/SezorusArticles/Article_EZ001/blob/master/Images/img8.jpg)<br><br>
+![img8](https://github.com/2ZGroupSolutionsArticles/Article_EZ001/blob/master/Images/img8.jpg)<br><br>
 
 Now with this permission, we can use our user.
 
@@ -202,11 +202,11 @@ Each next step is nested encryption of data with previously generated keys with 
 
 And that's all. Now we have everything for `Authorization` HTTP header. We can download our file from S3.<br><br>
 
-You can check the [demo project](https://github.com/SezorusArticles/Article_001/tree/master/AWSS3DownloadFileDemo). It’s just an example, recommend not to use it as is because used force unwrapping in some places, but you can adopt this solution for your specific needs and in a more safe manner.<br><br>
+You can check the [demo project](https://github.com/2ZGroupSolutionsArticles/Article_001/tree/master/AWSS3DownloadFileDemo). It’s just an example, recommend not to use it as is because used force unwrapping in some places, but you can adopt this solution for your specific needs and in a more safe manner.<br><br>
 
 ### Author
 Yevhenii(Eugene) Zozulia
 
-Email: yevheniizozulia@sezorus.com
+Email: yevheniizozulia@2zgroup.net
 
 LinkedIn: [EugeneZI](https://www.linkedin.com/in/eugenezi/)
